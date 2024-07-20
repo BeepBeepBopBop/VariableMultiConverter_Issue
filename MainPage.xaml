@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiApp4.MainPage"
+             x:Name="mainPage"
+             >
+    <ContentPage.Resources>
+        <mct:VariableMultiValueConverter x:Key="AllTrueConverter" ConditionType="All"/>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <Label Text="Hello world">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Value="True">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource AllTrueConverter}">
+                            <Binding Path="ConditionA" Source="{x:Reference mainPage}"/>
+                            <Binding Path="ConditionB" Source="{x:Reference mainPage}" />
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    
+                    <Setter Property="TextColor" Value="Red"/>
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+    </VerticalStackLayout>
+
+</ContentPage>
